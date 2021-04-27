@@ -21,6 +21,8 @@ public class ThirdActivity extends AppCompatActivity {
     RadioGroup rdGrp;
     RadioButton rdBtn;
     Button btnSubmit;
+    ArrayList<DailyCA> al;
+    String currModCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +33,15 @@ public class ThirdActivity extends AppCompatActivity {
         btnSubmit = findViewById(R.id.buttonSubmit);
 
         Intent intent = getIntent();
-        String text =  intent.getStringExtra("add");
+        String text = intent.getStringExtra("add");
         TextView tvWeek = (TextView) findViewById(R.id.week);
         tvWeek.setText("Week " + text);
+
+        al = new ArrayList<DailyCA>();
+
+        // getting arraylist and module code from intent
+        al = (ArrayList<DailyCA>) intent.getSerializableExtra("arraylist");
+        currModCode = intent.getStringExtra("currModCode");
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,9 +53,17 @@ public class ThirdActivity extends AppCompatActivity {
                 String message = "Week " + text + ": " + rdBtn.getText();
                 Toast.makeText(ThirdActivity.this, message, Toast.LENGTH_LONG).show();
 
+
+                int week = Integer.parseInt(text);
+                String grade = String.valueOf(rdBtn.getText());
+                DailyCA newCA = new DailyCA(grade, currModCode, week);
+
+                al.add(newCA);
+
                 // Return to Second Activity
                 Intent i = new Intent(ThirdActivity.this, SecondActivity.class);
-                DailyCA grade = (DailyCA) i.getSerializableExtra("added");
+                i.putExtra("arraylist", al);
+                i.putExtra("selectedModCode", currModCode);
                 startActivity(i);
 
             }

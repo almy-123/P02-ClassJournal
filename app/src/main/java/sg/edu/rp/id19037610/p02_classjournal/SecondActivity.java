@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     ListView lvDailyGrades;
     ArrayList<DailyCA> al;
     ArrayList<DailyCA> alChecked;
+    ArrayList<DailyCA> newAL;
     ArrayAdapter aa;
     Button btnEmail;
     Button btnInfo;
@@ -30,17 +32,25 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.second_activity);
 
+        newAL = new ArrayList<DailyCA>();
+
         Intent i = getIntent();
         String modCode = i.getStringExtra("selectedModCode");
+        newAL = (ArrayList<DailyCA>) i.getSerializableExtra("arraylist");
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
-        al.add(new DailyCA("B", "C347", 1));
-        al.add(new DailyCA("C", "C347", 2));
-        al.add(new DailyCA("A", "C347", 3));
-        al.add(new DailyCA("D", "C302", 1));
-        al.add(new DailyCA("C", "C302", 2));
-        al.add(new DailyCA("A", "C302", 3));
+
+        if (newAL == null) {
+            al.add(new DailyCA("B", "C347", 1));
+            al.add(new DailyCA("C", "C347", 2));
+            al.add(new DailyCA("A", "C347", 3));
+            al.add(new DailyCA("D", "C302", 1));
+            al.add(new DailyCA("C", "C302", 2));
+            al.add(new DailyCA("A", "C302", 3));
+        } else {
+            al = newAL;
+        }
 
         alChecked = new ArrayList<DailyCA>();
         for (int x = 0; x < al.size(); x++) {
@@ -91,13 +101,20 @@ public class SecondActivity extends AppCompatActivity {
                     String text = String.valueOf(week);
                     Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
                     intent.putExtra("add", text);
+
+                    // passing the arraylist to ThirdActivity
+                    intent.putExtra("arraylist", al);
+
+                    // passing the module code to ThirdActivity
+                    intent.putExtra("currModCode", modCode);
+
                     startActivity(intent);
                 }
 
-                Intent i = new Intent();
-                i.putExtra("added", "added");
-                setResult(RESULT_OK, i);
-                finish();
+//                Intent i = new Intent();
+//                i.putExtra("added", "added");
+//                setResult(RESULT_OK, i);
+//                finish();
             }
         });
     }
