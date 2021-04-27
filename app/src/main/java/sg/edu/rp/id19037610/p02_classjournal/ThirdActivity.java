@@ -50,9 +50,6 @@ public class ThirdActivity extends AppCompatActivity {
                 int selected = rdGrp.getCheckedRadioButtonId();
                 // Find radio button by returned id
                 rdBtn = findViewById(selected);
-                String message = "Week " + text + ": " + rdBtn.getText();
-                Toast.makeText(ThirdActivity.this, message, Toast.LENGTH_LONG).show();
-
 
                 int week = Integer.parseInt(text);
                 String grade = String.valueOf(rdBtn.getText());
@@ -65,7 +62,6 @@ public class ThirdActivity extends AppCompatActivity {
                 i.putExtra("arraylist", al);
                 i.putExtra("selectedModCode", currModCode);
                 startActivity(i);
-
             }
         });
     }

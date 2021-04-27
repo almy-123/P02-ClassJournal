@@ -95,10 +95,14 @@ public class SecondActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get the id of the radio button
                 int id = al.size() - 1;
                 if (al.get(id).getWeek() != 0) {
+                    // adding 1 to the week so that the weeks will increase
                     int week = al.get(id).getWeek() + 1;
+                    // setting the number of weeks to a string
                     String text = String.valueOf(week);
+                    // sending the data to ThirdActivity
                     Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
                     intent.putExtra("add", text);
 
@@ -110,11 +114,6 @@ public class SecondActivity extends AppCompatActivity {
 
                     startActivity(intent);
                 }
-
-//                Intent i = new Intent();
-//                i.putExtra("added", "added");
-//                setResult(RESULT_OK, i);
-//                finish();
             }
         });
     }
