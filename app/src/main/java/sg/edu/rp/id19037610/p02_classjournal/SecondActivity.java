@@ -58,10 +58,10 @@ public class SecondActivity extends AppCompatActivity {
         btnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent();
+                String message = "Hi faci, ";
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jason_lim@rp.edu.sg"});
-                //email.putExtra(Intent.EXTRA_TEXT, );
+                email.putExtra(Intent.EXTRA_TEXT, message);
                 email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email, "Send Email"));
             }
