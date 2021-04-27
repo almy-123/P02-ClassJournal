@@ -2,7 +2,11 @@ package sg.edu.rp.id19037610.p02_classjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,5 +30,15 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modules);
         lvModules.setAdapter(adapter);
+
+        lvModules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(MainActivity.this, SecondActivity.class);
+                i.putExtra("index", position);
+                startActivity(i);
+            }
+        });
     }
+
 }
