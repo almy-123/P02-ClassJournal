@@ -51,17 +51,26 @@ public class SecondActivity extends AppCompatActivity {
             }
         }
 
+
+
         aa = new DGAdapter(this, R.layout.daily_grade_row,alChecked);
         lvDailyGrades.setAdapter(aa);
 
         btnEmail = (Button) findViewById(R.id.buttonEmail);
         btnEmail.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                String message = new String();
+                message += "Hi faci \n I am ... \n Please see my remarks so far, thank you! \n";
+                for(int y=0; y<alChecked.size(); y++){
+                    message += "Week " + alChecked.get(y).getWeek() + ": DG : " + alChecked.get(y).getDgGrade() + "\n";
+                }
+
                 Intent i = new Intent();
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jason_lim@rp.edu.sg"});
-                //email.putExtra(Intent.EXTRA_TEXT, );
+                email.putExtra(Intent.EXTRA_TEXT, message);
                 email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email, "Send Email"));
             }
