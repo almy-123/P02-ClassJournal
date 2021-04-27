@@ -1,8 +1,12 @@
 package sg.edu.rp.id19037610.p02_classjournal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +20,9 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<DailyCA> al;
     ArrayList<DailyCA> alChecked;
     ArrayAdapter aa;
+    Button btnEmail;
+    Button btnInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,9 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String modCode = i.getStringExtra("selectedModCode");
+
+        btnInfo = findViewById(R.id.buttonInfo);
+
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
@@ -43,5 +53,27 @@ public class SecondActivity extends AppCompatActivity {
 
         aa = new DGAdapter(this, R.layout.daily_grade_row,alChecked);
         lvDailyGrades.setAdapter(aa);
+
+        btnEmail = (Button) findViewById(R.id.buttonEmail);
+        btnEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                //i.putExtra("Week " + )
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jason_lim@rp.edu.sg"});
+                //email.putExtra(Intent.EXTRA_TEXT, );
+                startActivity(Intent.createChooser(email, "Send Email"));
+            }
+        });
+
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent webIntent = new Intent(Intent.ACTION_VIEW);
+                webIntent.setData(Uri.parse("https://www.rp.edu.sg/soi/full-time-diplomas/details/diploma-in-digital-design-and-development"));
+                startActivity(webIntent);
+            }
+        });
     }
 }
