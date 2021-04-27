@@ -47,9 +47,7 @@ public class ThirdActivity extends AppCompatActivity {
 
                 // Return to Second Activity
                 Intent i = new Intent(ThirdActivity.this, SecondActivity.class);
-                DailyCA grade = (DailyCA) i.getSerializableExtra("added");
                 startActivity(i);
-
             }
         });
     }
