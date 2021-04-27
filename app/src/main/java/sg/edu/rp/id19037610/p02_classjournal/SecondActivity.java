@@ -59,10 +59,10 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
-                //i.putExtra("Week " + )
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jason_lim@rp.edu.sg"});
                 //email.putExtra(Intent.EXTRA_TEXT, );
+                email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email, "Send Email"));
             }
         });
