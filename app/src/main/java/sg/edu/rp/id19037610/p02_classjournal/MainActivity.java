@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lvModules;
-    ArrayList<String> modules;
-    ArrayAdapter adapter;
+    ArrayList<Module> modules;
+    ArrayAdapter aa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,18 +25,19 @@ public class MainActivity extends AppCompatActivity {
 
         lvModules = findViewById(R.id.lvModules);
 
-        modules = new ArrayList<>();
-        modules.add("C347");
-        modules.add("C300");
+        modules = new ArrayList<Module>();
+        modules.add(new Module("C302","Web Services"));
+        modules.add(new Module("C347","Android Programming II"));
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modules);
-        lvModules.setAdapter(adapter);
+        aa = new ModuleAdapter(this, R.layout.module_row,modules);
+        lvModules.setAdapter(aa);
 
         lvModules.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, SecondActivity.class);
-                i.putExtra("moduleCode", modules.get(position));
+                String moduleCodeSelected = modules.get(position).getModuleCode();
+                i.putExtra("selectedModCode", moduleCodeSelected);
                 startActivity(i);
             }
         });

@@ -23,16 +23,16 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.second_activity);
 
         Intent i = getIntent();
-        String modCode = i.getStringExtra("moduleCode");
+        String modCode = i.getStringExtra("selectedModCode");
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
         al.add(new DailyCA("B","C347",1));
         al.add(new DailyCA("C","C347",2));
         al.add(new DailyCA("A","C347",3));
-        al.add(new DailyCA("D","C300",1));
-        al.add(new DailyCA("C","C300",2));
-        al.add(new DailyCA("A","C300",3));
+        al.add(new DailyCA("D","C302",1));
+        al.add(new DailyCA("C","C302",2));
+        al.add(new DailyCA("A","C302",3));
 
         alChecked = new ArrayList<DailyCA>();
         for(int x=0; x<al.size(); x++){

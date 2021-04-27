@@ -5,20 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DGAdapter extends ArrayAdapter<DailyCA> {
+public class ModuleAdapter extends ArrayAdapter<Module> {
 
-    private ArrayList<DailyCA> al;
-    private TextView tvWeeks;
-    private TextView tvDailyGrade;
+    private ArrayList<Module> al;
+    private TextView tvModuleCode;
+    private TextView tvModuleName;
     private Context context;
 
 
-    public DGAdapter(Context context, int resource, ArrayList<DailyCA> objects){
+    public ModuleAdapter(Context context, int resource, ArrayList<Module> objects){
         super(context, resource, objects);
         al = objects;
         this.context = context;
@@ -28,17 +27,15 @@ public class DGAdapter extends ArrayAdapter<DailyCA> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.daily_grade_row, parent, false);
+        View rowView = inflater.inflate(R.layout.module_row, parent, false);
 
-        tvWeeks = rowView.findViewById(R.id.tvWeeks);
-        tvDailyGrade = rowView.findViewById(R.id.tvDailyGrade);
+        tvModuleCode = rowView.findViewById(R.id.tvModuleCode);
+        tvModuleName = rowView.findViewById(R.id.tvModuleName);
 
-        DailyCA current = al.get(position);
+        Module current = al.get(position);
 
-        String week = "Week " + current.getWeek();
-        tvWeeks.setText(week);
-        tvDailyGrade.setText(current.getDgGrade());
-
+        tvModuleCode.setText(current.getModuleCode());
+        tvModuleName.setText(current.getModuleName());
 
         return rowView;
     }
