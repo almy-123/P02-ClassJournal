@@ -3,6 +3,7 @@ package sg.edu.rp.id19037610.p02_classjournal;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -34,21 +35,21 @@ public class SecondActivity extends AppCompatActivity {
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
-        al.add(new DailyCA("B","C347",1));
-        al.add(new DailyCA("C","C347",2));
-        al.add(new DailyCA("A","C347",3));
-        al.add(new DailyCA("D","C302",1));
-        al.add(new DailyCA("C","C302",2));
-        al.add(new DailyCA("A","C302",3));
+        al.add(new DailyCA("B", "C347", 1));
+        al.add(new DailyCA("C", "C347", 2));
+        al.add(new DailyCA("A", "C347", 3));
+        al.add(new DailyCA("D", "C302", 1));
+        al.add(new DailyCA("C", "C302", 2));
+        al.add(new DailyCA("A", "C302", 3));
 
         alChecked = new ArrayList<DailyCA>();
-        for(int x=0; x<al.size(); x++){
-            if(al.get(x).getModuleCode().equals(modCode)){
+        for (int x = 0; x < al.size(); x++) {
+            if (al.get(x).getModuleCode().equals(modCode)) {
                 alChecked.add(al.get(x));
             }
         }
 
-        aa = new DGAdapter(this, R.layout.daily_grade_row,alChecked);
+        aa = new DGAdapter(this, R.layout.daily_grade_row, alChecked);
         lvDailyGrades.setAdapter(aa);
 
         btnEmail = (Button) findViewById(R.id.buttonEmail);
@@ -57,7 +58,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String message = new String();
                 message += "Hi faci \n I am ... \n Please see my remarks so far, thank you! \n";
-                for(int y=0; y<alChecked.size(); y++){
+                for (int y = 0; y < alChecked.size(); y++) {
                     message += "Week " + alChecked.get(y).getWeek() + ": DG : " + alChecked.get(y).getDgGrade() + "\n";
                 }
 
@@ -84,14 +85,19 @@ public class SecondActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < al.size(); i++) {
-                    if (al.get(i).getWeek() != -1) {
-                        int week = al.get(i).getWeek() + 1;
-                        Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                        intent.putExtra("add", week);
-
-                    }
+                int id = al.size() - 1;
+                if (al.get(id).getWeek() != 0) {
+                    int week = al.get(id).getWeek() + 1;
+                    String text = String.valueOf(week);
+                    Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                    intent.putExtra("add", text);
+                    startActivity(intent);
                 }
+
+                Intent i = new Intent();
+                i.putExtra("added", "added");
+                setResult(RESULT_OK, i);
+                finish();
             }
         });
     }
