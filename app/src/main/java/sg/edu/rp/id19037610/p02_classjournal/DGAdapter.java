@@ -34,7 +34,7 @@ public class DGAdapter extends ArrayAdapter<DailyCA> {
 
         DailyCA current = al.get(position);
 
-        String week = "Week" + current.getWeek();
+        String week = "Week " + current.getWeek();
         tvWeeks.setText(week);
         tvDailyGrade.setText(current.getDgGrade());
 

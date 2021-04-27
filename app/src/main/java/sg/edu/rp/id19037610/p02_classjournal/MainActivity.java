@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         modules = new ArrayList<>();
         modules.add("C347");
+        modules.add("C300");
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, modules);
         lvModules.setAdapter(adapter);
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, SecondActivity.class);
-                i.putExtra("index", position);
+                i.putExtra("moduleCode", modules.get(position));
                 startActivity(i);
             }
         });
