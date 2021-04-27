@@ -13,9 +13,8 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 
     ListView lvDailyGrades;
-    TextView tvtest;
-
     ArrayList<DailyCA> al;
+    ArrayList<DailyCA> alChecked;
     ArrayAdapter aa;
 
     @Override
@@ -24,18 +23,24 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.second_activity);
 
         Intent i = getIntent();
-        Integer index = i.getIntExtra("index", 0);
-
-        tvtest = findViewById(R.id.tvTest);
-        tvtest.setText(index.toString());
+        String modCode = i.getStringExtra("moduleCode");
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
         al.add(new DailyCA("B","C347",1));
         al.add(new DailyCA("C","C347",2));
         al.add(new DailyCA("A","C347",3));
+        al.add(new DailyCA("D","C300",3));
+        al.add(new DailyCA("C","C300",3));
 
-        aa = new DGAdapter(this, R.layout.daily_grade_row,al);
+        alChecked = new ArrayList<DailyCA>();
+        for(int x=0; x<al.size(); x++){
+            if(al.get(x).getModuleCode().equals(modCode)){
+                alChecked.add(al.get(x));
+            }
+        }
+
+        aa = new DGAdapter(this, R.layout.daily_grade_row,alChecked);
         lvDailyGrades.setAdapter(aa);
     }
 }
