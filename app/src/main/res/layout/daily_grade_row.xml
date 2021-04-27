@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="#FF8C00"
+                android:textSize="20dp"
                 android:text="DG" />
 
             <TextView
