@@ -22,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayAdapter aa;
     Button btnEmail;
     Button btnInfo;
-
+    Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,6 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String modCode = i.getStringExtra("selectedModCode");
-
-        btnInfo = findViewById(R.id.buttonInfo);
-
 
         lvDailyGrades = findViewById(R.id.lvDailyGrades);
         al = new ArrayList<DailyCA>();
@@ -51,14 +48,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         }
 
-
-
         aa = new DGAdapter(this, R.layout.daily_grade_row,alChecked);
         lvDailyGrades.setAdapter(aa);
 
         btnEmail = (Button) findViewById(R.id.buttonEmail);
         btnEmail.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 String message = new String();
@@ -76,12 +70,28 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+        btnInfo = findViewById(R.id.buttonInfo);
         btnInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent webIntent = new Intent(Intent.ACTION_VIEW);
                 webIntent.setData(Uri.parse("https://www.rp.edu.sg/soi/full-time-diplomas/details/diploma-in-digital-design-and-development"));
                 startActivity(webIntent);
+            }
+        });
+
+        btnAdd = findViewById(R.id.buttonAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < al.size(); i++) {
+                    if (al.get(i).getWeek() != -1) {
+                        int week = al.get(i).getWeek() + 1;
+                        Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                        intent.putExtra("add", week);
+
+                    }
+                }
             }
         });
     }
