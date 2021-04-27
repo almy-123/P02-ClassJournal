@@ -30,8 +30,9 @@ public class SecondActivity extends AppCompatActivity {
         al.add(new DailyCA("B","C347",1));
         al.add(new DailyCA("C","C347",2));
         al.add(new DailyCA("A","C347",3));
-        al.add(new DailyCA("D","C300",3));
-        al.add(new DailyCA("C","C300",3));
+        al.add(new DailyCA("D","C300",1));
+        al.add(new DailyCA("C","C300",2));
+        al.add(new DailyCA("A","C300",3));
 
         alChecked = new ArrayList<DailyCA>();
         for(int x=0; x<al.size(); x++){
