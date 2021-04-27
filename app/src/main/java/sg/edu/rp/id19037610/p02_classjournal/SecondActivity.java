@@ -22,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayAdapter aa;
     Button btnEmail;
     Button btnInfo;
-
+    Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,21 @@ public class SecondActivity extends AppCompatActivity {
                 Intent webIntent = new Intent(Intent.ACTION_VIEW);
                 webIntent.setData(Uri.parse("https://www.rp.edu.sg/soi/full-time-diplomas/details/diploma-in-digital-design-and-development"));
                 startActivity(webIntent);
+            }
+        });
+
+        btnAdd = findViewById(R.id.buttonAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < al.size(); i++) {
+                    if (al.get(i).getWeek() != 0) {
+                        int week = al.get(i).getWeek() + 1;
+                        Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+                        intent.putExtra("add", week);
+                        startActivity(intent);
+                    }
+                }
             }
         });
     }
