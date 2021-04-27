@@ -26,18 +26,24 @@
             android:id="@+id/buttonInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
             android:text="Info" />
 
         <Button
             android:id="@+id/buttonAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
             android:text="Add" />
 
         <Button
             android:id="@+id/buttonEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="5dp"
             android:text="Email Faci" />
     </LinearLayout>
 </LinearLayout>
