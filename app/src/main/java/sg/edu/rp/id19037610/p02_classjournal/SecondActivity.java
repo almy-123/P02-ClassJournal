@@ -22,7 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayAdapter aa;
     Button btnEmail;
     Button btnInfo;
-    Button btnAdd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +58,10 @@ public class SecondActivity extends AppCompatActivity {
         btnEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = "Hi faci, ";
+                Intent i = new Intent();
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"jason_lim@rp.edu.sg"});
-                email.putExtra(Intent.EXTRA_TEXT, message);
+                //email.putExtra(Intent.EXTRA_TEXT, );
                 email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email, "Send Email"));
             }
@@ -73,21 +73,6 @@ public class SecondActivity extends AppCompatActivity {
                 Intent webIntent = new Intent(Intent.ACTION_VIEW);
                 webIntent.setData(Uri.parse("https://www.rp.edu.sg/soi/full-time-diplomas/details/diploma-in-digital-design-and-development"));
                 startActivity(webIntent);
-            }
-        });
-
-        btnAdd = findViewById(R.id.buttonAdd);
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < al.size(); i++) {
-                    if (al.get(i).getWeek() != 0) {
-                        int week = al.get(i).getWeek() + 1;
-                        Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
-                        intent.putExtra("add", week);
-                        startActivity(intent);
-                    }
-                }
             }
         });
     }
